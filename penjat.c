@@ -43,7 +43,7 @@ int main()
    char encerts[LONGITUD_PARAULA];
  
    // printf() displays the string inside quotation
-   printf("P E N J A D O \n");
+   printf("A H O R C A D O \n");
 
    printf("NUMERO PARAULES: %d\n", NUMERO_PARAULES);
 
