@@ -9,23 +9,31 @@
 #define FALSE 0
 #define MAX_NUM_ERRORS  6
 
-int comptarLletres(char palabrasParam[]){
-   int index = 0;
+int comptarLletres(char *palabrasParam){
+
    int contador = 0;
    int sortir = FALSE;
+   for (int index = 0;index < LONGITUD_PARAULA && !sortir; index++ ){
 
-   while (index < LONGITUD_PARAULA && !sortir ) {
-      
       if (palabrasParam[index] != '\n') {
          contador += 1;
       } else {
          sortir = TRUE;
       }
-
-      index += 1;
    }
 
    return contador;
+}
+
+int lletraDinsLlista(char* llista, char lletra){
+
+   for (int index = 0; index < LONGITUD_PARAULA; index++){
+      if (llista[index] == lletra){
+         return TRUE;
+      }
+   }
+
+   return FALSE;
 }
 
 
@@ -35,7 +43,7 @@ int main()
    char encerts[LONGITUD_PARAULA];
  
    // printf() displays the string inside quotation
-   printf("P E N J A T \n");
+   printf("P E N J A D O \n");
 
    printf("NUMERO PARAULES: %d\n", NUMERO_PARAULES);
 
@@ -56,36 +64,40 @@ int main()
 
    printf("La paraula té %d lletres \n", contador);
 
-  
-   
    int errors = 0;
 
    int ganar = FALSE;
+
+   int indexEncerts = 0;
 
    while (errors <= MAX_NUM_ERRORS && !ganar){
 
       printf("Introdueix una lletra\n");
 
-      char lletra = getchar();
+      char lletra;
+      scanf("%s",&lletra);
       
-      if (lletra != 10) {
+      for ( int indexParaula = 0; indexParaula < comptarLletres(paraula); indexParaula ++ ){
+      
+         if (paraula[indexParaula] ==  lletra){
+            // OK! L'hem trobada!
+            printf("%c ",lletra);
 
-         for ( int indexParaula = 0; indexParaula < comptarLletres(paraula); indexParaula ++ ){
-         
-            if (paraula[indexParaula] ==  lletra){
-               // OK! L'hem trobada!
-               printf("%c ",lletra);
+            encerts[indexEncerts] = lletra;
+            indexEncerts++;
+
+         } else { 
+            if (lletraDinsLlista(encerts,paraula[indexParaula])) {
+               printf("%c ",paraula[indexParaula]); 
 
             } else {
                // Siga jugando.... encara no
                printf("_ ");
-
-
             }
+         }
+         
       }
-
-
-      }
+      printf("\n");
    }
    
 
