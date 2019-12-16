@@ -10,11 +10,10 @@
 #define MAX_NUM_ERRORS  6
 
 int comptarLletres(char palabrasParam[]){
-   int index = 0;
    int contador = 0;
    int sortir = FALSE;
-
-   while (index < LONGITUD_PARAULA && !sortir ) {
+   
+   for (int index = 0; index < LONGITUD_PARAULA && !sortir; index++){
       
       if (palabrasParam[index] != '\n') {
          contador += 1;
@@ -22,7 +21,6 @@ int comptarLletres(char palabrasParam[]){
          sortir = TRUE;
       }
 
-      index += 1;
    }
 
    return contador;
