@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "wordutil.h"
 
 #define NUMERO_PARAULES 15
 #define LONGITUD_PARAULA 50
@@ -10,18 +9,41 @@
 #define FALSE 0
 #define MAX_NUM_ERRORS  6
 
+int comptarLletres(char *palabrasParam){
+
+   int contador = 0;
+   int sortir = FALSE;
+   for (int index = 0;index < LONGITUD_PARAULA && !sortir; index++ ){
+
+      if (palabrasParam[index] != '\n') {
+         contador += 1;
+      } else {
+         sortir = TRUE;
+      }
+   }
+
+   return contador;
+}
+
+int lletraDinsLlista(char* llista, char lletra){
+
+   for (int index = 0; index < LONGITUD_PARAULA; index++){
+      if (llista[index] == lletra){
+         return TRUE;
+      }
+   }
+
+   return FALSE;
+}
+
 
 int main()
 {
 
    char encerts[LONGITUD_PARAULA];
-
-   for (int index = 0; index < LONGITUD_PARAULA; index++){
-      encerts[index]=0;
-   }
  
    // printf() displays the string inside quotation
-   printf("A H O R C A D O \n");
+   printf("P E N J A T \n");
 
    printf("NUMERO PARAULES: %d\n", NUMERO_PARAULES);
 
@@ -38,7 +60,7 @@ int main()
 
    printf("%s\n",paraula);
 
-   int contador = comptarLletres(paraula,LONGITUD_PARAULA);
+   int contador = comptarLletres(paraula);
 
    printf("La paraula té %d lletres \n", contador);
 
@@ -48,17 +70,14 @@ int main()
 
    int indexEncerts = 0;
 
-   int numeroEncerts = 0;
-
    while (errors <= MAX_NUM_ERRORS && !ganar){
 
       printf("Introdueix una lletra\n");
 
       char lletra;
       scanf("%s",&lletra);
-      ganar = TRUE;
-      int hemEncertat = FALSE;
-      for ( int indexParaula = 0; indexParaula < comptarLletres(paraula,LONGITUD_PARAULA); indexParaula ++ ){
+      
+      for ( int indexParaula = 0; indexParaula < comptarLletres(paraula); indexParaula ++ ){
       
          if (paraula[indexParaula] ==  lletra){
             // OK! L'hem trobada!
@@ -66,36 +85,23 @@ int main()
 
             encerts[indexEncerts] = lletra;
             indexEncerts++;
-            hemEncertat = TRUE;
 
          } else { 
-            if (lletraDinsLlista(encerts,paraula[indexParaula],LONGITUD_PARAULA)) {
+            if (lletraDinsLlista(encerts,paraula[indexParaula])) {
                printf("%c ",paraula[indexParaula]); 
 
             } else {
                // Siga jugando.... encara no
                printf("_ ");
-               ganar = FALSE;
             }
          }
          
       }
-
-      if (!hemEncertat){
-         printf("La lletra no es troba!");
-         errors++;
-      }
-   
-      
       printf("\n");
    }
    
 
-   if (ganar){
-      printf("HAS GUANYAT!!!!");
-   } else {
-      printf("HAS PERDUT!!!!");
-   }
+   
 
 
 }
