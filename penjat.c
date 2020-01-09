@@ -21,7 +21,7 @@ int main()
    }
  
    // printf() displays the string inside quotation
-   printf("A H O R C A D O \n");
+   printf("P E N J A T \n");
 
    printf("NUMERO PARAULES: %d\n", NUMERO_PARAULES);
 
